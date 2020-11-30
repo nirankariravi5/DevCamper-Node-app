@@ -1,0 +1,13 @@
+const express=require('express')
+const router=express.Router()
+const{register,login,getMe,forgotPassword,resetPassword, updateDetails, updatePassword, logout}=require('../controller/auth')
+const {protect}=require('../middleware/auth')
+router.route('/register').post(register)
+router.route('/login').post(login)
+router.route('/logout').get(logout)
+router.route('/me').get(protect,getMe)
+router.route('/updateDetails').patch(protect,updateDetails)
+router.route('/updatePassword').patch(protect,updatePassword)
+router.route('/forgotPassword').post(forgotPassword)
+router.route('/resetPassword/:resetToken').patch(resetPassword)
+module.exports=router 
